@@ -1,12 +1,14 @@
 # httpcache
 > 💾 Cache HTTP request easily from public API - https://httpcache.me
 # Goal
-HttpCache is an API wrapper that allows you to cache http request from public API,
-it can be very useful if you want to use a public API on a static website for example,
-no need to develop and deploy an http proxy to override the rate limits.
+HttpCache is a http wrapper that allows you to cache
+http request easily without configuration.
+It can be very useful for cache public API request
+on a static website for example, not needed anymore
+to develop and deploy a http proxy to do this job.
 # Usage
-For use it, you just need to add `https://httpcache.me/{exp_in_minute}/` before the endpoint,
-that it, you can check below an example for cache a request on Github API for get last repos from the user ermos :
+you just need to add `https://httpcache.me/{exp_in_minute}/` before the url of the service you want cache, that's it !
+You can see an example below :
 ```shell
 https://httpcache.me/1280/https://api.github.com/users/ermos/repos?sort=created&per_page=4&page=1&desc
 ```
@@ -28,5 +30,5 @@ Each request need working server side and can cost time.
 <p align="center">
   <img src="docs/with_httpcache.jpg">
 </p>
-When a user come to your website, the request is made from the user client, httpcache will save the result in memories and when
-the second user come on your website, the result is directly returned without asking the public API.
+When a user come to your website, the request is made from the user's client, httpcache will save the result in memory and when
+the second user will come on your website, the result will directly returned without communicate with the public API.

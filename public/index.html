@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta property="og:site_name" content="HTTPCache">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#101010">
+    <meta property="og:title" content="HTTPCache - HTTP wrapper for cache your request">
+    <meta name="description" content="Cache http request from public API, no need to develop and deploy an http proxy to do that.">
+    <meta property="og:description" content="Cache http request from public API, no need to develop and deploy an http proxy to do that.">
+    <meta property="og:image" content="https://httpcache.me/static/img/icon-big.png">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+    <meta property="og:locale" content="fr">
+    <link rel="icon" href="https://httpcache.me/static/img/icon.png">
+    <title>HTTPCache - HTTP wrapper for cache your request</title>
+    <style>
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            background-color: #2f2f3b;
+            color: #f1f1f1;
+            margin: auto;
+            padding: 40px;
+            max-width: 650px;
+            box-sizing: border-box;
+        }
+
+        body, input {
+            font-family:
+                    Arial,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    Roboto,
+                    Oxygen-Sans,
+                    Ubuntu,
+                    Cantarell,
+                    "Helvetica Neue",
+                    sans-serif;
+            font-size:1.6rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1, h2 {
+            font-weight: bold;
+            box-sizing: border-box;
+            padding: 10px;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 5rem;
+            text-align: center;
+        }
+
+        h1 span {
+            font-size: 3rem;
+            color: #131318;
+        }
+
+        h2 {
+            font-size: 2rem;
+            padding-bottom: 0;
+        }
+
+        p {
+            box-sizing: border-box;
+            padding: 10px;
+            line-height: 1.3;
+            margin: 0;
+            color: #c5c5c5;
+        }
+
+        .input {
+            border-radius: 5px;
+            background-color: #fff;
+            width: 100%;
+            color: #6e6e6e;
+            display: flex;
+            align-items: center;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .input__content {
+            flex: 1;
+            box-sizing: border-box;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        input {
+            display: inline;
+            color: #131318;
+            font-weight: bold;
+            outline: none;
+            border: 0;
+            font-size: 1.6rem;
+            padding: 0;
+            margin: 0;
+            min-width: 10px;
+        }
+
+        button {
+            border: 0;
+            outline: none;
+            color: #3d3d3d;
+            background-color: #cbcbcb;
+            font-weight: bold;
+            padding: 0 20px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .copyright {
+            text-align: right;
+        }
+
+        a {
+            color: inherit;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>HTTPCache<span>.me</span></h1>
+
+<div class="input">
+    <div class="input__content">
+        https://httpcache.me/<input type="text" value="60" />/<input type="text" value="https://api.dev" />
+    </div>
+    <button>Copy</button>
+</div>
+
+<h2 style="margin-top: 40px;">What is HTTPCache.me ?</h2>
+<p>
+    HttpCache is a http wrapper that allows you to cache http request easily without configuration.
+    It can be very useful for cache public API request on a static website for example,
+    not needed anymore to develop and deploy a http proxy to do this job.
+</p>
+<h2>How to use it ?</h2>
+<p>
+    you just need to add `https://httpcache.me/{exp_in_minute}/` before the url of the service you want cache, that's it !
+</p>
+<h2>How does it work ?</h2>
+<p>
+    HTTPCache.me work like every http proxy, he just forward the request to the specified service.
+    HTTPCache.me done in addition some working for manage cache.
+</p>
+<p class="copyright">
+    &copy; 2022 - <a href="https://doplex.fr/" target="_blank">doplex.fr</a>
+</p>
+<script type="application/javascript">
+    var inputs = document.querySelectorAll("input");
+    var btn = document.querySelector("button");
+
+    btn.addEventListener("click", function() {
+        navigator.clipboard.writeText("https://httpcache.me/" + inputs[0].value + "/" + inputs[1].value)
+    });
+
+    inputs.forEach(function(e) {
+        e.addEventListener('input', resizeInput);
+        resizeInput.call(e);
+    })
+
+    function resizeInput() {
+        this.style.width = this.value.length + "ch";
+    }
+</script>
+</body>
+</html>

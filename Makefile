@@ -4,13 +4,13 @@ bin = "http"
 test:
 	@go test ./cmd/$(bin)
 
-# Build binary
-build:
+# Compile binary
+compile:
 	@GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-w -s" -o ./dist/${bin} -v ./cmd/${bin}
 
 # Run server
 run:
-	@make build
+	@make compile
 	@./dist/${bin}
 
 # Clear dist
