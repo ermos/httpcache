@@ -17,6 +17,7 @@ func main() {
 	err := dotenv.Require(
 		"APP_PORT",
 		"LOG_PATH",
+		"PUBLIC_PATH",
 		"MIN_MINUTES",
 		"MAX_MINUTES",
 	)
@@ -29,7 +30,7 @@ func main() {
 
 	app := fiber.New()
 
-	app.Static("/", "./public")
+	app.Static("/", os.Getenv("PUBLIC_PATH"))
 	app.Get("/:minutes/*", controllers.GetWrapper)
 
 	_ = app.Listen(fmt.Sprintf(":%s", os.Getenv("APP_PORT")))

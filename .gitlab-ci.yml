@@ -1,0 +1,44 @@
+stages:
+  - build
+  - dockerise
+  - release
+
+build:
+  image: golang:latest
+  stage: build
+  only:
+    - main
+  script:
+    - make build
+    - mv dist/http build/http
+    - mv public build/public
+
+dockerise:
+  image: docker:stable
+  stage: dockerise
+  only:
+    - main
+  services:
+    - docker:dind
+  script:
+    - cd build
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/ermos/httpcache:latest .
+    - docker push $CI_REGISTRY/ermos/httpcache:latest
+
+deploy:
+  image: alpine:latest
+  stage: release
+  only:
+    - main
+  before_script:
+    - apk update && apk add openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
+    - cat ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh deploy@$DEPLOYMENT_SERVER_IP "cd /docker/httpcache && docker-compose stop http && docker-compose pull http && docker-compose up -d http"
