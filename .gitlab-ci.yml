@@ -9,7 +9,7 @@ build:
   only:
     - main
   script:
-    - make build
+    - make compile
     - mv dist/http build/http
     - mv public build/public
 
