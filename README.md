@@ -10,15 +10,23 @@ that it, you can check below an example for cache a request on Github API for ge
 ```shell
 https://httpcache.me/1280/https://api.github.com/users/ermos/repos?sort=created&per_page=4&page=1&desc
 ```
-# Use case
+# Use cases
+
 ## Cache request across users
+
 ### Without HTTPCache.me
-![without](docs/without_httpcache.jpg)
+<p align="center">
+  <img src="docs/without_httpcache.jpg">
+</p>
 When you use a public API directly in your website,
-the request is made from the user client, if the public API send cache header,
-the user client will save it. But now, if a second user client come on your website,
-he send a new request and store it into his client. Each request need some working server side and can cost time.
+the request is made from the user's client, if the public API send cache header,
+the user's client will save it. Now, if a second user come on your website,
+he will send a new request and store it into his client.
+Each request need working server side and can cost time.
+
 ### With HTTPCache.me
-![with](docs/with_httpcache.jpg)
+<p align="center">
+  <img src="docs/with_httpcache.jpg">
+</p>
 When a user come to your website, the request is made from the user client, httpcache will save the result in memories and when
 the second user come on your website, the result is directly returned without asking the public API.
