@@ -135,7 +135,7 @@
 
 <div class="input">
     <div class="input__content">
-        https://httpcache.me/<input type="text" value="60" />/<input type="text" value="https://api.dev" />
+        https://httpcache.me/<input type="text" value="60" />/<input style="flex:1" type="text" value="https://api.dev" />
     </div>
     <button>Copy</button>
 </div>
@@ -166,10 +166,8 @@
         navigator.clipboard.writeText("https://httpcache.me/" + inputs[0].value + "/" + inputs[1].value)
     });
 
-    inputs.forEach(function(e) {
-        e.addEventListener('input', resizeInput);
-        resizeInput.call(e);
-    })
+    inputs[0].addEventListener('input', resizeInput);
+    resizeInput.call(inputs[0]);
 
     function resizeInput() {
         this.style.width = this.value.length + "ch";

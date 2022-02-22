@@ -9,7 +9,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"time"
 )
 
 var (
@@ -27,6 +26,8 @@ func GetWrapper(c *fiber.Ctx) error {
 			Message: "invalid format for minute's parameter",
 		})
 	}
+
+	c.Response().Header.Add("Cache-Time", strconv.Itoa(minutes*60))
 
 	if minMinutes == 0 {
 		minMinutes, err = strconv.Atoi(os.Getenv("MIN_MINUTES"))
@@ -56,9 +57,7 @@ func GetWrapper(c *fiber.Ctx) error {
 		})
 	}
 
-	expAt := time.Now().Add(time.Minute * time.Duration(minutes)).Unix()
-
-	err = wrapper.Handle(c, url, expAt)
+	err = wrapper.Handle(c, url, minutes)
 	if err != nil {
 		log.Println(err)
 		return c.Status(400).JSON(response.Error{

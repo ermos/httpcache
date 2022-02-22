@@ -9,12 +9,15 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"strconv"
+	"time"
 )
 
-func Handle(c *fiber.Ctx, url string, expAt int64) (err error) {
+func Handle(c *fiber.Ctx, url string, minutes int) (err error) {
 	var result interface{}
 
-	key := base64.StdEncoding.EncodeToString([]byte(url))
+	key := base64.StdEncoding.EncodeToString([]byte(strconv.Itoa(minutes) + "/" + url))
+	expAt := time.Now().Add(time.Minute * time.Duration(minutes)).Unix()
 
 	defer func() {
 		if r := recover(); r != nil {
