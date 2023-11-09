@@ -1,5 +1,5 @@
 # httpcache
-> 💾 Cache HTTP request easily from public API - https://httpcache.me
+> 💾 Cache HTTP request easily from public API - https://cache.smiti.fr
 # Goal
 HttpCache is a http wrapper that allows you to cache
 http request easily without configuration.
@@ -7,10 +7,10 @@ It can be very useful for cache public API request
 on a static website for example, not needed anymore
 to develop and deploy a http proxy to do this job.
 # Usage
-you just need to add `https://httpcache.me/{exp_in_minute}/` before the url of the service you want cache, that's it !
+you just need to add `https://cache.smiti.fr/{exp_in_minute}/` before the url of the service you want cache, that's it !
 You can see an example below :
 ```shell
-https://httpcache.me/1280/https://api.github.com/users/ermos/repos?sort=created&per_page=4&page=1&desc
+https://cache.smiti.fr/1280/https://api.github.com/users/ermos/repos?sort=created&per_page=4&page=1&desc
 ```
 # Use cases
 
