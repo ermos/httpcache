@@ -7,7 +7,7 @@ import (
 	"github.com/ermos/httpcache/internal/pkg/controllers"
 	"github.com/ermos/httpcache/internal/pkg/logger"
 	"github.com/gofiber/fiber/v2"
-	cache2 "github.com/gofiber/fiber/v2/middleware/cache"
+	cacheMiddleware "github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/utils"
 	"log"
@@ -39,8 +39,8 @@ func main() {
 		Level: compress.LevelBestSpeed, // 1
 	}))
 
-	app.Use(cache2.New(cache2.Config{
-		ExpirationGenerator: func(c *fiber.Ctx, cfg *cache2.Config) time.Duration {
+	app.Use(cacheMiddleware.New(cacheMiddleware.Config{
+		ExpirationGenerator: func(c *fiber.Ctx, cfg *cacheMiddleware.Config) time.Duration {
 			newCacheTime, _ := strconv.Atoi(c.GetRespHeader("Cache-Time", "600"))
 			return time.Second * time.Duration(newCacheTime)
 		},
@@ -52,5 +52,5 @@ func main() {
 	app.Static("/", os.Getenv("PUBLIC_PATH"))
 	app.Get("/:minutes/*", controllers.GetWrapper)
 
-	_ = app.Listen(fmt.Sprintf(":%s", os.Getenv("APP_PORT")))
+	log.Fatal(app.Listen(fmt.Sprintf(":%s", os.Getenv("APP_PORT"))))
 }

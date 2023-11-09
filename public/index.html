@@ -4,18 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta property="og:site_name" content="HTTPCache">
+    <meta property="og:site_name" content="{{.Name}}">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#101010">
-    <meta property="og:title" content="HTTPCache - HTTP wrapper for cache your request">
+    <meta property="og:title" content="{{.Name}} - HTTP wrapper for cache your request">
     <meta name="description" content="Cache http request from public API, no need to develop and deploy an http proxy to do that.">
     <meta property="og:description" content="Cache http request from public API, no need to develop and deploy an http proxy to do that.">
-    <meta property="og:image" content="https://httpcache.me/icon_150x150.png">
+    <meta property="og:image" content="{{.Host}}/icon_150x150.png">
     <meta property="og:image:width" content="150">
     <meta property="og:image:height" content="150">
     <meta property="og:locale" content="fr">
-    <link rel="icon" href="https://httpcache.me/favicon.png">
-    <title>HTTPCache - HTTP wrapper for cache your request</title>
+    <link rel="icon" href="{{.Host}}/favicon.png">
+    <title>{{.Name}} - HTTP wrapper for cache your request</title>
     <style>
         html {
             font-size: 62.5%;
@@ -58,11 +58,6 @@
         h1 {
             font-size: 5rem;
             text-align: center;
-        }
-
-        h1 span {
-            font-size: 3rem;
-            color: #96a820;
         }
 
         h2 {
@@ -131,42 +126,42 @@
     </style>
 </head>
 <body>
-<h1>HTTPCache<span>.me</span></h1>
+<h1>{{.Name}}</h1>
 
 <div class="input">
     <div class="input__content">
-        https://httpcache.me/<input type="text" value="60" />/<input style="flex:1" type="text" value="https://api.dev" />
+        {{.Host}}/<input type="text" value="60" />/<input style="flex:1" type="text" value="https://api.dev" />
     </div>
     <button>Copy</button>
 </div>
 
-<h2 style="margin-top: 40px;">What is HTTPCache.me ?</h2>
+<h2 style="margin-top: 40px;">What is {{.Name}} ?</h2>
 <p>
-    HttpCache is a http wrapper that allows you to cache http request easily without configuration.
+    {{.Name}} is a http wrapper that allows you to cache http request easily without configuration.
     It can be very useful for cache public API request on a static website for example,
     not needed anymore to develop and deploy a http proxy to do this job.
 </p>
 <h2>How to use it ?</h2>
 <p>
-    you just need to add `https://httpcache.me/{exp_in_minute}/` before the url of the service you want cache, that's it !
+    you just need to add `{{.Host}}/{exp_in_minute}/` before the url of the service you want cache, that's it !
 </p>
 <h2>How does it work ?</h2>
 <p>
-    HTTPCache.me work like every http proxy, he just forward the request to the specified service.
-    HTTPCache.me done in addition some working for manage cache.
+    {{.Name}}.me work like every http proxy, he just forward the request to the specified service.
+    {{.Name}}.me done in addition some working for manage cache.
     This project is open-source and written in golang,
     if you want to know more about how it works,
     you can directly look at the sources on <a href="https://github.com/ermos/httpcache" target="_blank">Github</a>.
 </p>
 <p class="copyright">
-    &copy; 2022 - <a href="https://doplex.fr/" target="_blank">doplex.fr</a>
+    &copy; 2022 - <a href="https://kilian.smiti.fr/" target="_blank">Kilian SMITI</a>
 </p>
 <script type="application/javascript">
     var inputs = document.querySelectorAll("input");
     var btn = document.querySelector("button");
 
     btn.addEventListener("click", function() {
-        navigator.clipboard.writeText("https://httpcache.me/" + inputs[0].value + "/" + inputs[1].value)
+        navigator.clipboard.writeText("{{.Host}}/" + inputs[0].value + "/" + inputs[1].value)
     });
 
     inputs[0].addEventListener('input', resizeInput);
